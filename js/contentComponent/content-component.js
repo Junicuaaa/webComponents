@@ -8,9 +8,16 @@ export default class navComponent extends HTMLElement{
     constructor(){
         super();
         this.attachShadow({mode: "open"});
+    }
+    evento(e){
+        console.log(e);
+    }
+    connectedCallback(){
         Promise.resolve(navComponent.component()).then(html=>{
             this.shadowRoot.innerHTML = html
-        })      
+            this.button = this.shadowRoot.querySelector("button");
+            this.button.addEventListener("click", this.evento.bind(this))  
+        })
     }
 }
 customElements.define(namE, navComponent);
